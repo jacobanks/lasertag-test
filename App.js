@@ -1,21 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+//Screens --
+import HomeScreen from './screens/HomeScreen'
+import GunScreen from './screens/GunScreen'
+import LoginScreen from './screens/LoginScreen'
+import HostScreen from './screens/HostScreen'
+import JoinGameScreen from './screens/JoinGameScreen';
+import SignupScreen from './screens/SignupScreen';
+import GameLobbyScreen from './screens/GameLobbyScreen';
+import InGameScreen from './screens/InGame';
+import LoadingScreen from './screens/LoadingScreen';
+import { LogBox } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+// Screen setup
+const RootStack = createStackNavigator(
+  {
+    Login: LoginScreen,
+    Signup: SignupScreen,
+    Home: HomeScreen,
+    Join: JoinGameScreen,
+    Host: HostScreen,
+    Gun: GunScreen,
+    Lobby: GameLobbyScreen,
+    Game: InGameScreen ,
+    Loading: LoadingScreen
   },
-});
+  {
+    initialRouteName: "Home",
+    headerMode: 'none',
+    navigationOptions: {headerVisible: true, gestureEnabled: false,}
+  }
+);
+
+const AppContainer = createAppContainer(RootStack);
+// LogBox.ignoreAllLogs(false);
+
+//---------------- Exported data---------------------- \\
+export default class App extends React.Component {
+  componentWillUnmount(){
+    console.log("UNMOUNTING APP");
+  }
+  render() {
+    return <AppContainer />;
+  }
+}

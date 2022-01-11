@@ -9,13 +9,24 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "convert-string": "^0.1.0",
     "expo": "~44.0.2",
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
+    "native-base": "^3.3.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-    "react-native-web": "0.17.1"
+    "react-native-ble-manager": "^8.0.1",
+    "react-native-elements": "^3.4.2",
+    "react-native-gesture-handler": "^2.1.1",
+    "react-native-numeric-input": "^1.9.0",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-storage": "^1.0.1",
+    "react-native-svg": "^12.1.1",
+    "react-native-web": "0.17.1",
+    "react-navigation": "^4.4.4",
+    "react-navigation-stack": "^2.10.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
