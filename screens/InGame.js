@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, NativeEventEmitter, AppState, NativeModules, ActivityIndicator, FlatList, Dimensions, ViewBase, Alert } from 'react-native';
 import { Text, ThemeProvider, ListItem } from 'react-native-elements';
-
-// import CustomHeader from '../components/CustomHeader';
+import { LaserTheme } from '../components/Custom_theme';
+import CustomHeader from '../components/CustomHeader';
 import { Web_Urls } from '../constants/webUrls';
 
 const dimensions = Dimensions.get('window');
@@ -258,15 +258,15 @@ export default class GameLobbyScreen extends Component {
       }
     });
     return (
-      <View>
-
+      <ThemeProvider theme={LaserTheme}>
         {/* <BluetoothManager {...this.props} screen= "Home" ></BluetoothManager> */}
+        <CustomHeader {...this.props} headerText="Game In Progress" headerType="game"/>
         {this.rendergameTimer(gameTime)}
         
         <View style={{ flex: 8 }}> 
           {this.renderTeamScores(this.state.num_teams)}
         </View>
-      </View>
+      </ThemeProvider>
     );
   }
 }

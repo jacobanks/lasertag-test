@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {StyleSheet,View} from 'react-native';
+import {StyleSheet,View,Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import EntypoI from 'react-native-vector-icons/Entypo'
 import { Button, ThemeProvider, Input, Header } from 'react-native-elements';
-
-import { Container, Content, Spinner, Body,Left, Right } from 'native-base';
+import { LaserTheme } from '../components/Custom_theme';
+import { Container, Content, Spinner, Body,Left, Right, NativeBaseProvider } from 'native-base';
 import {Web_Urls} from '../constants/webUrls';
-// import CustomHeader from '../components/CustomHeader';
+import CustomHeader from '../components/CustomHeader';
 import HomeScreen from './HomeScreen';
 import Title from '../components/Title'
 
@@ -129,7 +129,8 @@ export default class SignupScreen extends Component {
         }
       }
       
-    
+  goLogin = () => {this.props.navigation.navigate("Login")}
+
   renderSpinner = () => {
     if (this.state.loading == true){
       return(
@@ -147,7 +148,13 @@ export default class SignupScreen extends Component {
 
   render() {
     return(
-      <View>
+      <NativeBaseProvider>
+        <Header>
+          <Icon name='chevron-left' type='feather' color='white' onPress={() => this.goLogin()} />
+          <Title><Text style= {{color: 'white'}}>{'Signup'}</Text></Title>
+          <Text></Text>
+        </Header>
+        <Container>
           <Input
             //autoCompleteType = 'username'
             placeholder='Username'
@@ -194,7 +201,8 @@ export default class SignupScreen extends Component {
             errorMessage= {this.state.finalError}
             loading = {this.state.loading}
             />
-            </View>
+          </Container>
+      </NativeBaseProvider>
       );
     }
   }

@@ -15,6 +15,7 @@ import {
 import {ListItem,Divider} from 'react-native-elements'
 import {Button, ThemeProvider, Input, Icon} from 'react-native-elements'
 import BleManager, { connect } from 'react-native-ble-manager';
+import { LaserTheme } from './Custom_theme';
 import { stringToBytes, bytesToString } from 'convert-string';
 import { TapGestureHandler } from 'react-native-gesture-handler';
 import { Container } from 'native-base';
@@ -310,10 +311,11 @@ export default class GunStatusDesplay extends Component {
     //var connectedGun = this.state.connectedGun;
     //var color = '#fff'
     return (
-      <View>
+     <ThemeProvider theme={LaserTheme}>
         {this.renderGunStatus()}   
         <Divider style={{ backgroundColor: '#ae936c' }} />           
-      </View>
+
+        </ThemeProvider>
     );
   }
 }

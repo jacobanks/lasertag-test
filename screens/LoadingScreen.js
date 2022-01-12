@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, NativeEventEmitter, AppState, NativeModules, ActivityIndicator, FlatList, Dimensions, ViewBase, Alert } from 'react-native';
-
-// import CustomHeader from '../components/CustomHeader';
+import { LaserTheme } from '../components/Custom_theme';
+import CustomHeader from '../components/CustomHeader';
 import { ThemeProvider, Icon, Text, Button, Slider, ListItem, ButtonGroup, Card } from 'react-native-elements';
 import { Container, Spinner } from 'native-base';
 import { Web_Urls } from '../constants/webUrls';
@@ -146,7 +146,8 @@ export default class GameLobbyScreen extends Component {
       }
     });
     return (
-      <View>
+      <ThemeProvider theme={LaserTheme}>
+        <CustomHeader {...this.props} headerText="Awaiting Game Start" headerType="game" />
         <Text style={styles.titleText}>Game Code: {this.state.game_id}</Text>
         <Spinner style={{
           height: 5,
@@ -157,7 +158,7 @@ export default class GameLobbyScreen extends Component {
           alignContent: 'center'
         }} size='large' color='#7447d1' />
         {this.renderStartButton()}
-      </View>
+      </ThemeProvider>
     );
   }
 }

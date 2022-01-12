@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NativeModules, NativeEventEmitter, StyleSheet,Text,View } from 'react-native';
 import BleManager from 'react-native-ble-manager';
+import { LaserTheme } from './Custom_theme';
 import {Button, ThemeProvider, Input, Divider} from 'react-native-elements';
 import { stringToBytes, bytesToString } from "convert-string";
 import { Dimensions} from 'react-native';
@@ -300,7 +301,7 @@ render() {
       )
     }
     return (
-      <View>
+     <ThemeProvider theme={LaserTheme}>
         { this.renderGunStatusBottom() }
         <Input
           placeholder='Enter Gun ID Manually'
@@ -330,7 +331,7 @@ render() {
             //   <Text style={{textAlign: 'center'}}>{this.state.gunConnected ? 'Gun Connected' : 'Gun Disconnected'}</Text>
             // </View>
           }
-      </View>
+      </ThemeProvider>
     );
   }
 }

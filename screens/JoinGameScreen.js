@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {View,NativeEventEmitter,NativeModules,Dimensions} from 'react-native';
 import { Text,Button, ThemeProvider, Input} from 'react-native-elements';
-
-// import Icon from 'react-native-vector-icons/Feather';
-// import CustomHeader from '../components/CustomHeader';
+import { LaserTheme } from '../components/Custom_theme';
+import Icon from 'react-native-vector-icons/Feather';
+import CustomHeader from '../components/CustomHeader';
 import {Web_Urls} from '../constants/webUrls';
 // import { getSupportedVideoFormats } from 'expo/build/AR';
 
@@ -266,7 +266,8 @@ export default class JoinGameScreen extends Component {
 
   render() {
     return(
-      <View {...this.props}>
+      <ThemeProvider {...this.props}  theme={LaserTheme}>
+        <CustomHeader {...this.props} headerText= "Join Game" headerType = "join" />
         <View style={{marginTop: 10, marginHorizontal:10 , justifyContent: 'center', alignContent: 'center'}}>
           <Text style = {{fontSize:40, textAlign: "center"}}>Enter Game Key</Text>
           <Text></Text>
@@ -290,7 +291,7 @@ export default class JoinGameScreen extends Component {
           title= "Join Game" 
           onPress={() => this.joinPressed(this.state.key)}/>
         {this.renderJoinError()}
-        </View>
-        );
+      </ThemeProvider>
+    );
   }
 } 

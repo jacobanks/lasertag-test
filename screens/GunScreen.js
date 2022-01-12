@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {StyleSheet,NativeEventEmitter,NativeModules} from 'react-native';
 import {Text, View, FlatList, Switch} from 'native-base';
-// import CustomHeader from '../components/CustomHeader';
+import CustomHeader from '../components/CustomHeader';
 import { Button, ThemeProvider, ListItem,Divider, Input} from 'react-native-elements'; 
-
+import { LaserTheme } from '../components/Custom_theme';
 import BluetoothManager from '../components/Ble_manager'
 //const BleManagerModule = NativeModules.BleManager;
 //const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -38,9 +38,12 @@ export default class GunScreen extends Component {
   }
   render() {
     return (
-      <View>
+      <ThemeProvider theme={LaserTheme}>
+        <CustomHeader {...this.props} headerText = "Connect to Gun" headerType = "gun"/>
+        <ThemeProvider theme={LaserTheme}>
           <BluetoothManager ref={bleManager => {this.bleManager = bleManager}} {...this.props} getGunData = {this.getGunData} screen= "Gun"></BluetoothManager>
-      </View>
+        </ThemeProvider>
+      </ThemeProvider>
     )
   }
 }

@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import ButtonMenu from '../components/Button_menu'
-import {View, Dimensions} from 'react-native';
-// import CustomHeader from '../components/CustomHeader';
-
+import { Dimensions} from 'react-native';
+import CustomHeader from '../components/CustomHeader';
+import {LaserTheme} from '../components/Custom_theme';
 import BluetoothManager from '../components/Ble_manager'
-import { Text, ThemeProvider} from 'react-native-elements';
+import { Text, ThemeProvider, Header} from 'react-native-elements';
+import { Container, Content, Spinner, Body,Left, Right, NativeBaseProvider } from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
+import Title from '../components/Title'
 
 
 export default class HomeScreen extends Component {
@@ -108,7 +111,6 @@ componentWillUnmount() { // cancel all async tasks herere?
   console.log("Unmounting HomeScreen")
 }
  onMenuPress = (menuVal) => {
-  console.log("TEST")
   const menuTranslater = this.state.menuTranslater
   let optDic = menuTranslater[menuVal]
   let optText = optDic.text
@@ -117,18 +119,25 @@ componentWillUnmount() { // cancel all async tasks herere?
   this.props.navigation.navigate(optVal,{userData: this.state.userData, gunData: this.state.gunData});
 }
 
+logout = () => {this.props.navigation.navigate("Login")}
+
   render() {
     const {menuOptions} = this.state
-    const dimensions = Dimensions.get('window');
+    // const dimensions = Dimensions.get('window');
     //const imageHeight = Math.round(dimensions.width * 0.20);
-    const imageWidth = dimensions.width;
+    // const imageWidth = dimensions.width;
     return (
-      // <View>
+      <NativeBaseProvider>
+       <Header>
+          <Text/>
+          <Title><Text style= {{color: 'white'}}>{'Home'}</Text></Title>
+          <Icon name='log-out' type='feather' color='white' onPress={() => this.logout()} />
+        </Header>
         <ButtonMenu 
               menuOptions = {menuOptions}
               onPressItem = {this.onMenuPress}
         />
-      /* </View>  */
+      </NativeBaseProvider>
       )
   }
 }

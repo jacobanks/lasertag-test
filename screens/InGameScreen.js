@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {StyleSheet,View,NativeEventEmitter,AppState,NativeModules, ActivityIndicator, FlatList, Dimensions} from 'react-native';
 import { Text,Button, Icon, ThemeProvider, Input, Divider, ListItem,Card,Overlay} from 'react-native-elements';
-
-// import CustomHeader from '../components/CustomHeader';
+import { LaserTheme } from '../components/Custom_theme';
+import CustomHeader from '../components/CustomHeader';
 import GunStatusDisplay from '../components/GunStatusDisplay'
 import { stringToBytes, bytesToString } from 'convert-string';
 import BluetoothManager from '../components/Ble_manager'
 import {Web_Urls} from '../constants/webUrls';
 import { Item } from 'native-base';
 import storage from '../Storage';
-import { startAsync } from 'expo/build/AR';
+// import { startAsync } from 'expo/build/AR';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -791,7 +791,8 @@ export default class InGameScreen extends Component {
       gameTime = "not Set";
     }
     return(
-      <View {...this.props}>
+      <ThemeProvider {...this.props}  theme={LaserTheme}>
+        <CustomHeader {...this.props} refresh = {this.refresh} leaveGame = {this.leaveGame} headerText= "Match" headerType = "game" />
         <BluetoothManager ref={bleManager => {this.bleManager = bleManager}} {...this.props} getGunData = {this.getGunData} screen= "Game"></BluetoothManager>
         {this.rendergameTimer(gameTime)}
         {this.renderGameHeader(gameData)}
@@ -809,7 +810,7 @@ export default class InGameScreen extends Component {
           title= "Fire"
           onPress={() => this.fireGun()}
         />
-      </View>
+      </ThemeProvider>
     );
   }
 }

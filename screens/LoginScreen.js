@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import {StyleSheet,View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { Button, ThemeProvider, Input, Header } from 'react-native-elements';
-
-import { Container, Content, Spinner, Body,Left, Right } from 'native-base';
+import { LaserTheme } from '../components/Custom_theme';
+import { Container, Content, Spinner, Body,Left, Right, NativeBaseProvider } from 'native-base';
 import {Web_Urls} from '../constants/webUrls';
 import CustomHeader from '../components/CustomHeader';
 import HomeScreen from './HomeScreen';
@@ -167,6 +167,10 @@ export default class LoginScreen extends Component {
       }
     };
 
+    goSignup = () => {
+      console.log("Signup")
+      this.props.navigation.navigate("Signup")
+    }
 
     renderSpinner = () => {
       if (this.state.loading == true){
@@ -185,7 +189,13 @@ export default class LoginScreen extends Component {
 
     render() {
       return(
-        <View style={styles.container}>
+      <NativeBaseProvider>
+        <Header>
+          <Text></Text>
+          <Title><Text style= {{color: 'white'}}>{'Login'}</Text></Title>
+          <Icon name='user-plus' type='feather' color='white' onPress={() => this.goSignup()} />
+        </Header>
+        <Container>
         <Input
           value = {this.state.email}
           autoCompleteType = 'email'
@@ -194,7 +204,6 @@ export default class LoginScreen extends Component {
           leftIcon={{ type: 'feather', name: 'user' }}
           errorMessage= {this.state.emailError}
           onChangeText={this.editEmail}
-
         />
         <Input
           value = {this.state.pass}
@@ -216,7 +225,8 @@ export default class LoginScreen extends Component {
           onPress={() => this.loginPressed()}
           loading = {this.state.loading}
           />
-      </View>
+         </Container>
+         </NativeBaseProvider>
       );
     }
   }

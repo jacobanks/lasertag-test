@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import LaserTheme from './Custom_theme'
 import { Container, NativeBaseProvider } from 'native-base';
 import { Text, ThemeProvider, Button, Card} from 'react-native-elements';
 import AppImages from "../assets/index"
@@ -25,8 +26,8 @@ export default class ButtonMenu extends Component{
             >
                 <Text style={{justifyContent: 'center', textAlign:'center', }}>
                     {descriptionMap[i]}
-                </Text> 
-                <NativeBaseProvider>           
+                </Text>      
+                <NativeBaseProvider>
                 <Container style = {{flex: 0.3, flexDirection: 'row', justifyContent:'center', paddingTop:10}}>
                     <Button 
                         buttonStyle={styles.myButton}
@@ -35,8 +36,8 @@ export default class ButtonMenu extends Component{
                         onPress={ () => onPressItem(i)}
                         />
                 </Container>
-                </NativeBaseProvider>
-            </Card>      
+                </NativeBaseProvider>      
+            </Card>               
         )
     }
 
@@ -44,9 +45,11 @@ export default class ButtonMenu extends Component{
         const {menuOptions} = this.props
         console.log(menuOptions)
         return (
-            <View style= {styles.MenuStyle}>
-                {menuOptions.map(this.renderItem)}
-            </View>
+            // <ThemeProvider theme={LaserTheme}>
+                <View style= {styles.MenuStyle}>
+                    {menuOptions.map(this.renderItem)}
+                </View>
+            // </ThemeProvider>
         )
     }
 }

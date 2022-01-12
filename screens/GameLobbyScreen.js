@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import { Text, Button, ThemeProvider, ListItem } from 'react-native-elements';
-
-// import CustomHeader from '../components/CustomHeader';
+import { LaserTheme } from '../components/Custom_theme';
+import CustomHeader from '../components/CustomHeader';
 import { Web_Urls } from '../constants/webUrls';
 
 export default class GameLobbyScreen extends Component {
@@ -221,13 +221,14 @@ export default class GameLobbyScreen extends Component {
   
   render() {
     return (
-      <View>
+      <ThemeProvider theme={LaserTheme}>
+        <CustomHeader {...this.props} headerText="Game Lobby" headerType="lobby" />
         {/* <Text>{this.state.game_id} {JSON.stringify(this.state.teamData.teams)}</Text> Renders game ID and all team IDs - Delete or comment out when ready for deployment */}
         <Text style = {{ color: '#4a4a4a', fontSize: 40, textAlign: 'center'}}>Choose a Team</Text>
         <View style={{ flex: 2 }}>
           {this.renderTeamTemplate(this.state.num_teams)}
         </View>
-      </View>
+      </ThemeProvider>
     );
   }
 }

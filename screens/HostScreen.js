@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {NativeModules,View,Dimensions, NativeEventEmitter} from 'react-native';
 import { ThemeProvider , Icon, Text, Button, ButtonGroup} from 'react-native-elements';
-
-// import CustomHeader from '../components/CustomHeader'
+import { LaserTheme } from '../components/Custom_theme';
+import CustomHeader from '../components/CustomHeader'
 import { Container } from 'native-base';
 import {Web_Urls} from '../constants/webUrls';
 import NumericInput from 'react-native-numeric-input'
@@ -224,7 +224,9 @@ export default class HostScreen extends Component {
 
   render() {
     return (
-      <View {...this.props}>        
+      <ThemeProvider {...this.props}  theme={LaserTheme}>
+        
+        <CustomHeader {...this.props} headerText= "Create Game" headerType = "host" />
         <BluetoothManager {...this.props} screen= "Home"></BluetoothManager>
 
         {this.renderGameModeButtons()}
@@ -240,7 +242,8 @@ export default class HostScreen extends Component {
             title= "Begin Hosting" 
             onPress={() => this.createGame()}/>
         </View>
-    </View>        
+        
+      </ThemeProvider>
     );
   }
 }
