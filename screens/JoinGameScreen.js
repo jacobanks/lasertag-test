@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import {View,NativeEventEmitter,NativeModules,Dimensions} from 'react-native';
-import { Text,Button, ThemeProvider, Input} from 'react-native-elements';
+import { Text,Button, ThemeProvider, Input, Header} from 'react-native-elements';
 import { LaserTheme } from '../components/Custom_theme';
 import Icon from 'react-native-vector-icons/Feather';
 import CustomHeader from '../components/CustomHeader';
 import {Web_Urls} from '../constants/webUrls';
+import { Container, Content, Spinner, Body,Left, Right, NativeBaseProvider } from 'native-base';
+import Title from '../components/Title'
+
 // import { getSupportedVideoFormats } from 'expo/build/AR';
 
 const BleManagerModule = NativeModules.BleManager;
@@ -229,6 +232,7 @@ export default class JoinGameScreen extends Component {
     createSoloTeamRequest.send(JSON.stringify(payload));
   }
 
+  goBack = () => {this.props.navigation.goBack()}
 
   renderJoinError = () => {
     if (this.state.joinGameError != ''){
@@ -266,8 +270,13 @@ export default class JoinGameScreen extends Component {
 
   render() {
     return(
+      <NativeBaseProvider>
       <ThemeProvider {...this.props}  theme={LaserTheme}>
-        <CustomHeader {...this.props} headerText= "Join Game" headerType = "join" />
+        {/* <CustomHeader {...this.props} headerText= "Join Game" headerType = "join" /> */}
+        <Header>
+          <Icon name='chevron-left' type='feather' color='white' onPress={() => this.goBack()} />
+          <Title><Text style= {{color: 'white'}}>{'Join Game'}</Text></Title>
+        </Header>
         <View style={{marginTop: 10, marginHorizontal:10 , justifyContent: 'center', alignContent: 'center'}}>
           <Text style = {{fontSize:40, textAlign: "center"}}>Enter Game Key</Text>
           <Text></Text>
@@ -292,6 +301,7 @@ export default class JoinGameScreen extends Component {
           onPress={() => this.joinPressed(this.state.key)}/>
         {this.renderJoinError()}
       </ThemeProvider>
+      </NativeBaseProvider>
     );
   }
 } 

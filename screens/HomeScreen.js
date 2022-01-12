@@ -127,7 +127,7 @@ logout = () => {this.props.navigation.navigate("Login")}
     //const imageHeight = Math.round(dimensions.width * 0.20);
     // const imageWidth = dimensions.width;
     return (
-      <NativeBaseProvider>
+      <ThemeProvider theme={LaserTheme}>
        <Header>
           <Text/>
           <Title><Text style= {{color: 'white'}}>{'Home'}</Text></Title>
@@ -137,7 +137,7 @@ logout = () => {this.props.navigation.navigate("Login")}
               menuOptions = {menuOptions}
               onPressItem = {this.onMenuPress}
         />
-      </NativeBaseProvider>
+      </ThemeProvider>
       )
   }
 }

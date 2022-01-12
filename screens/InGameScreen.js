@@ -7,8 +7,9 @@ import GunStatusDisplay from '../components/GunStatusDisplay'
 import { stringToBytes, bytesToString } from 'convert-string';
 import BluetoothManager from '../components/Ble_manager'
 import {Web_Urls} from '../constants/webUrls';
-import { Item } from 'native-base';
+import { Item, NativeBaseProvider } from 'native-base';
 import storage from '../Storage';
+import { Header } from 'react-native/Libraries/NewAppScreen';
 // import { startAsync } from 'expo/build/AR';
 
 const BleManagerModule = NativeModules.BleManager;
@@ -770,6 +771,18 @@ export default class InGameScreen extends Component {
       )
     }
   }
+  
+  exitGame = () =>{
+    Alert.alert(
+      'Exit Game',
+      'Are you sure you want to exit this game?',
+      [
+        {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Yes', onPress: () => this.props.navigation.navigate("Home")},
+      ],
+      {cancelable: true},
+    );
+  }
 
   DataKeyExtractor = (item, index) => index.toString()
 
@@ -791,8 +804,15 @@ export default class InGameScreen extends Component {
       gameTime = "not Set";
     }
     return(
+      <NativeBaseProvider>
       <ThemeProvider {...this.props}  theme={LaserTheme}>
-        <CustomHeader {...this.props} refresh = {this.refresh} leaveGame = {this.leaveGame} headerText= "Match" headerType = "game" />
+        {/* <CustomHeader {...this.props} refresh = {this.refresh} leaveGame = {this.leaveGame} headerText= "Match" headerType = "game" /> */}
+        <Header>
+        <Icon name='chevron-left' type='feather' color='white' onPress={() => this.exitGame()} />
+          {/* <Text/> */}
+          <Title><Text style= {{color: 'white'}}>{'Match'}</Text></Title>
+          {/* <Icon name='refresh-cw' type='feather' color='white' onPress={() => this.refresh()} /> */}
+        </Header>
         <BluetoothManager ref={bleManager => {this.bleManager = bleManager}} {...this.props} getGunData = {this.getGunData} screen= "Game"></BluetoothManager>
         {this.rendergameTimer(gameTime)}
         {this.renderGameHeader(gameData)}
@@ -811,6 +831,7 @@ export default class InGameScreen extends Component {
           onPress={() => this.fireGun()}
         />
       </ThemeProvider>
+      </NativeBaseProvider>
     );
   }
 }

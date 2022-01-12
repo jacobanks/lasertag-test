@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
-import { Text, Button, ThemeProvider, ListItem } from 'react-native-elements';
+import { Text, Button, ThemeProvider, ListItem, Header } from 'react-native-elements';
 import { LaserTheme } from '../components/Custom_theme';
 import CustomHeader from '../components/CustomHeader';
 import { Web_Urls } from '../constants/webUrls';
+import { NativeBaseProvider } from 'native-base';
+import Title from '../components/Title'
+import Icon from 'react-native-vector-icons/Feather';
 
 export default class GameLobbyScreen extends Component {
   static navigationOptions = {
@@ -219,16 +222,35 @@ export default class GameLobbyScreen extends Component {
     request.send();
   }
   
+  exitLobby = () =>{
+    Alert.alert(
+      'Exit Lobby',
+      'Are you sure you want to exit this lobby?',
+      [
+        {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Yes', onPress: () => this.props.navigation.navigate("Home")},
+      ],
+      {cancelable: true},
+    );
+  }
+  
   render() {
     return (
+      <NativeBaseProvider>
       <ThemeProvider theme={LaserTheme}>
-        <CustomHeader {...this.props} headerText="Game Lobby" headerType="lobby" />
+        {/* <CustomHeader {...this.props} headerText="Game Lobby" headerType="lobby" /> */}
+        <Header>
+          <Icon name='chevron-left' type='feather' color='white' onPress={() => this.exitLobby()} />
+          <Title><Text style= {{color: 'white'}}>{'Game Lobby'}</Text></Title>
+          {/* <Icon name='refresh-cw' type='feather' color='white' onPress={() => this.refresh()} /> */}
+        </Header>
         {/* <Text>{this.state.game_id} {JSON.stringify(this.state.teamData.teams)}</Text> Renders game ID and all team IDs - Delete or comment out when ready for deployment */}
         <Text style = {{ color: '#4a4a4a', fontSize: 40, textAlign: 'center'}}>Choose a Team</Text>
         <View style={{ flex: 2 }}>
           {this.renderTeamTemplate(this.state.num_teams)}
         </View>
       </ThemeProvider>
+      </NativeBaseProvider>
     );
   }
 }

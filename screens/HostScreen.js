@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import {NativeModules,View,Dimensions, NativeEventEmitter} from 'react-native';
-import { ThemeProvider , Icon, Text, Button, ButtonGroup} from 'react-native-elements';
+import { ThemeProvider, Text, Button, ButtonGroup, Header} from 'react-native-elements';
 import { LaserTheme } from '../components/Custom_theme';
 import CustomHeader from '../components/CustomHeader'
-import { Container } from 'native-base';
+import { Container, NativeBaseProvider } from 'native-base';
 import {Web_Urls} from '../constants/webUrls';
 import NumericInput from 'react-native-numeric-input'
 import BluetoothManager from '../components/Ble_manager'
+import Icon from 'react-native-vector-icons/Feather';
+import Title from '../components/Title'
 
 const dimensions = Dimensions.get('window');
 const Container_Width = Math.round(dimensions.width *1/3);
@@ -222,28 +224,37 @@ export default class HostScreen extends Component {
     )
   }
 
+  goBack = () => {this.props.navigation.goBack()}
+
   render() {
     return (
-      <ThemeProvider {...this.props}  theme={LaserTheme}>
-        
-        <CustomHeader {...this.props} headerText= "Create Game" headerType = "host" />
-        <BluetoothManager {...this.props} screen= "Home"></BluetoothManager>
+      <NativeBaseProvider>
+        <ThemeProvider {...this.props}  theme={LaserTheme}>
+          
+          {/* <CustomHeader {...this.props} headerText= "Create Game" headerType = "host" /> */}
+          <Header>
+            <Icon name='chevron-left' type='feather' color='white' onPress={() => this.goBack()} />
+            <Title><Text style= {{color: 'white'}}>{'Create Game'}</Text></Title>
+            {/*<Icon name='home' type='feather' color='white' onPress={() => this.goHome()} />*/}
+          </Header>
+          <BluetoothManager {...this.props} screen= "Home"></BluetoothManager>
 
-        {this.renderGameModeButtons()}
+          {this.renderGameModeButtons()}
 
-        {this.renderGameDesc()}
-        <View style={{flex: 2}}>
+          {this.renderGameDesc()}
+          <View style={{flex: 2}}>
 
-          {this.renderTeamNumberPicker()}
+            {this.renderTeamNumberPicker()}
 
-          <Button 
-            loading = {this.state.hostLoading} 
-            style={{paddingHorizontal: Container_Width/1.1, paddingVertical: 5, justifyContent: 'center', marginTop:10}} 
-            title= "Begin Hosting" 
-            onPress={() => this.createGame()}/>
-        </View>
-        
-      </ThemeProvider>
+            <Button 
+              loading = {this.state.hostLoading} 
+              style={{paddingHorizontal: Container_Width/1.1, paddingVertical: 5, justifyContent: 'center', marginTop:10}} 
+              title= "Begin Hosting" 
+              onPress={() => this.createGame()}/>
+          </View>
+          
+        </ThemeProvider>
+      </NativeBaseProvider>
     );
   }
 }

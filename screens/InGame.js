@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, NativeEventEmitter, AppState, NativeModules, ActivityIndicator, FlatList, Dimensions, ViewBase, Alert } from 'react-native';
-import { Text, ThemeProvider, ListItem } from 'react-native-elements';
+import { Text, ThemeProvider, ListItem, Header } from 'react-native-elements';
 import { LaserTheme } from '../components/Custom_theme';
 import CustomHeader from '../components/CustomHeader';
 import { Web_Urls } from '../constants/webUrls';
+import { NativeBaseProvider } from 'native-base';
+import Title from '../components/Title';
+import Icon from 'react-native-vector-icons/Feather';
 
 const dimensions = Dimensions.get('window');
 const Container_Width = Math.round(dimensions.width * 1 / 4);
@@ -248,6 +251,18 @@ export default class GameLobbyScreen extends Component {
     return(teamScoreList)
   }
 
+  exitGame = () =>{
+    Alert.alert(
+      'Exit Game',
+      'Are you sure you want to exit this game?',
+      [
+        {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Yes', onPress: () => this.props.navigation.navigate("Home")},
+      ],
+      {cancelable: true},
+    );
+  }
+  
   render() {
     const gameTime = 900;
     const styles = StyleSheet.create({
@@ -258,15 +273,23 @@ export default class GameLobbyScreen extends Component {
       }
     });
     return (
+      <NativeBaseProvider>
       <ThemeProvider theme={LaserTheme}>
         {/* <BluetoothManager {...this.props} screen= "Home" ></BluetoothManager> */}
-        <CustomHeader {...this.props} headerText="Game In Progress" headerType="game"/>
+        {/* <CustomHeader {...this.props} headerText="Game In Progress" headerType="game"/> */}
+        <Header>
+          <Icon name='chevron-left' type='feather' color='white' onPress={() => this.exitGame()} />
+          {/* <Text/> */}
+          <Title><Text style= {{color: 'white'}}>{'Game In Progress'}</Text></Title>
+          {/* <Icon name='refresh-cw' type='feather' color='white' onPress={() => this.refresh()} /> */}
+        </Header>
         {this.rendergameTimer(gameTime)}
         
         <View style={{ flex: 8 }}> 
           {this.renderTeamScores(this.state.num_teams)}
         </View>
       </ThemeProvider>
+      </NativeBaseProvider>
     );
   }
 }

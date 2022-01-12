@@ -149,6 +149,7 @@ export default class SignupScreen extends Component {
   render() {
     return(
       <NativeBaseProvider>
+        <ThemeProvider theme={LaserTheme}>
         <Header>
           <Icon name='chevron-left' type='feather' color='white' onPress={() => this.goLogin()} />
           <Title><Text style= {{color: 'white'}}>{'Signup'}</Text></Title>
@@ -202,6 +203,7 @@ export default class SignupScreen extends Component {
             loading = {this.state.loading}
             />
           </Container>
+          </ThemeProvider>
       </NativeBaseProvider>
       );
     }

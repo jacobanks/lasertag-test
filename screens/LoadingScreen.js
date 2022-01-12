@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, View, NativeEventEmitter, AppState, NativeModules, ActivityIndicator, FlatList, Dimensions, ViewBase, Alert } from 'react-native';
 import { LaserTheme } from '../components/Custom_theme';
 import CustomHeader from '../components/CustomHeader';
-import { ThemeProvider, Icon, Text, Button, Slider, ListItem, ButtonGroup, Card } from 'react-native-elements';
-import { Container, Spinner } from 'native-base';
+import { ThemeProvider, Text, Button, Slider, ListItem, ButtonGroup, Card, Header } from 'react-native-elements';
+import { Container, Spinner, NativeBaseProvider } from 'native-base';
 import { Web_Urls } from '../constants/webUrls';
+import Title from '../components/Title'
+import Icon from 'react-native-vector-icons/Feather';
 
 const dimensions = Dimensions.get('window');
 const Container_Width = Math.round(dimensions.width *1/3);
@@ -146,19 +148,27 @@ export default class GameLobbyScreen extends Component {
       }
     });
     return (
-      <ThemeProvider theme={LaserTheme}>
-        <CustomHeader {...this.props} headerText="Awaiting Game Start" headerType="game" />
-        <Text style={styles.titleText}>Game Code: {this.state.game_id}</Text>
-        <Spinner style={{
-          height: 5,
-          marginBottom: 100,
-          paddingTop: 100,
-          paddingLeft: 15,
-          justifyContent: 'center',
-          alignContent: 'center'
-        }} size='large' color='#7447d1' />
-        {this.renderStartButton()}
-      </ThemeProvider>
+      <NativeBaseProvider>
+        <ThemeProvider theme={LaserTheme}>
+          {/* <CustomHeader {...this.props} headerText="Awaiting Game Start" headerType="game" /> */}
+          <Header>
+            <Icon name='chevron-left' type='feather' color='white' onPress={() => this.exitGame()} />
+            {/* <Text/> */}
+            <Title><Text style= {{color: 'white'}}>{'Awaiting Game Start'}</Text></Title>
+            {/* <Icon name='refresh-cw' type='feather' color='white' onPress={() => this.refresh()} /> */}
+          </Header>
+          <Text style={styles.titleText}>Game Code: {this.state.game_id}</Text>
+          <Spinner style={{
+            height: 5,
+            marginBottom: 100,
+            paddingTop: 100,
+            paddingLeft: 15,
+            justifyContent: 'center',
+            alignContent: 'center'
+          }} size='large' color='#7447d1' />
+          {this.renderStartButton()}
+        </ThemeProvider>
+      </NativeBaseProvider>
     );
   }
 }

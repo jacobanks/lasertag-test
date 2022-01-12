@@ -27,7 +27,7 @@ const RootStack = createStackNavigator(
     Loading: LoadingScreen
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "Login",
     headerMode: 'none',
     navigationOptions: {headerVisible: true, gestureEnabled: false,}
   }

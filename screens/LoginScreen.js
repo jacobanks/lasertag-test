@@ -189,7 +189,8 @@ export default class LoginScreen extends Component {
 
     render() {
       return(
-      <NativeBaseProvider>
+        <NativeBaseProvider>
+        <ThemeProvider theme={LaserTheme}>
         <Header>
           <Text></Text>
           <Title><Text style= {{color: 'white'}}>{'Login'}</Text></Title>
@@ -226,7 +227,9 @@ export default class LoginScreen extends Component {
           loading = {this.state.loading}
           />
          </Container>
-         </NativeBaseProvider>
+         </ThemeProvider>
+        </NativeBaseProvider>
+
       );
     }
   }
