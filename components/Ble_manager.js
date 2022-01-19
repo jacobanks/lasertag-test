@@ -15,7 +15,7 @@ const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 async function connectAndPrepare(id) {
-  const peripheral = "24ED02DD-52D3-F5D8-6150-49A9B90B7F08";
+  const peripheral = "330FC17C-B5F9-1F7B-0373-6B1E11A24BBB";
   const service = "209D2B52-DBE1-4647-964F-3901BF515F7A";
   const characteristic = "B4B7C5CF-660D-40B8-A099-F794B813229D";
   
@@ -121,7 +121,11 @@ updateGame(){
 }
 
 scanForDevices() {
-  BleManager.scan([], 1);
+  // BleManager.scan([], 1s);
+  BleManager.scan([], 1, true).then(() => {
+    // Success code
+    console.log("Scan started");
+  });
 }
 
 write(id, service, char, data, size){
@@ -161,7 +165,7 @@ notification (id, service, char) {
 }
    
 retrieveservices(id) {
-  BleManager.retrieveServices("24ED02DD-52D3-F5D8-6150-49A9B90B7F08").then(
+  BleManager.retrieveServices("330FC17C-B5F9-1F7B-0373-6B1E11A24BBB").then(
     (peripheralInfo) => {
       console.log("Retrive info on", id, " :", peripheralInfo);
 
@@ -196,7 +200,7 @@ handleStopScan = () => {
 connect = (id) => {
   this.scanForDevices();
   if (id == 1){
-    const p_id = "24ED02DD-52D3-F5D8-6150-49A9B90B7F08";
+    const p_id = "330FC17C-B5F9-1F7B-0373-6B1E11A24BBB";
     BleManager.connect(p_id)
     .then(() => {
       console.log("Connected to id: ", p_id); 
@@ -265,7 +269,7 @@ renderGunStatusBottom() {
 editInput = id_input => {this.setState({ id_input });};
 
 render() {
-  const id = "24ED02DD-52D3-F5D8-6150-49A9B90B7F08";
+  const id = "330FC17C-B5F9-1F7B-0373-6B1E11A24BBB";
     if (this.props.screen == "Join"){
       return (
         <View>

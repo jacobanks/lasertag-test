@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
-import { Text, Button, ThemeProvider, ListItem, Header } from 'react-native-elements';
+import { Text, Button, ThemeProvider, ListItem, Header, Icon } from 'react-native-elements';
 import { LaserTheme } from '../components/Custom_theme';
 import CustomHeader from '../components/CustomHeader';
 import { Web_Urls } from '../constants/webUrls';
 import { NativeBaseProvider } from 'native-base';
 import Title from '../components/Title'
-import Icon from 'react-native-vector-icons/Feather';
+// import Icon from 'react-native-vector-icons/Feather';
 
 export default class GameLobbyScreen extends Component {
   static navigationOptions = {
@@ -235,6 +235,7 @@ export default class GameLobbyScreen extends Component {
   }
   
   render() {
+    console.log("GAMELOBBYSCREEN")
     return (
       <NativeBaseProvider>
       <ThemeProvider theme={LaserTheme}>

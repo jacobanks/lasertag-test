@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {StyleSheet,View,Text} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+// import Icon from 'react-native-vector-icons/FontAwesome5';
 import EntypoI from 'react-native-vector-icons/Entypo'
-import { Button, ThemeProvider, Input, Header } from 'react-native-elements';
+import { Button, ThemeProvider, Input, Header, Icons } from 'react-native-elements';
 import { LaserTheme } from '../components/Custom_theme';
 import { Container, Content, Spinner, Body,Left, Right, NativeBaseProvider } from 'native-base';
 import {Web_Urls} from '../constants/webUrls';

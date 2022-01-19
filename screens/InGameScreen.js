@@ -11,6 +11,7 @@ import { Item, NativeBaseProvider } from 'native-base';
 import storage from '../Storage';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 // import { startAsync } from 'expo/build/AR';
+import Title from '../components/Title';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -787,6 +788,7 @@ export default class InGameScreen extends Component {
   DataKeyExtractor = (item, index) => index.toString()
 
   render() {
+    console.log("INGAMESCREEN")
     flatListData = [{id: 0, name:"GameData", key: 1}];
     //console.log("Initial game Data",this.state.gameData);
     var gameData = this.state.gameData;

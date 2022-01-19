@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import {StyleSheet,NativeEventEmitter,NativeModules} from 'react-native';
 import {Text, View, FlatList, Switch, NativeBaseProvider} from 'native-base';
 import CustomHeader from '../components/CustomHeader';
-import { Button, ThemeProvider, ListItem,Divider, Input, Header} from 'react-native-elements'; 
+import { Button, ThemeProvider, ListItem,Divider, Input, Header, Icon} from 'react-native-elements'; 
 import { LaserTheme } from '../components/Custom_theme';
 import BluetoothManager from '../components/Ble_manager'
-import Icon from 'react-native-vector-icons/Feather';
+// import Icon from 'react-native-vector-icons/Feather';
 import Title from '../components/Title'
 
 //const BleManagerModule = NativeModules.BleManager;
@@ -43,6 +43,7 @@ export default class GunScreen extends Component {
           </View>)
   }
   render() {
+    console.log("GUNSCREEN")
     return (
       <NativeBaseProvider>
       <ThemeProvider theme={LaserTheme}>

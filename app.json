@@ -5,7 +5,17 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "bundleIdentifier": "com.jacobanks.lasertag"
+    }
   },
-  "name": "test"
+  "name": "test",
+  "orientation": "portrait",
+  "icon": "./assets/gunicon.png",
+  "splash": {
+    "image": "./assets/tu.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff"
+  }
 }

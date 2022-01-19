@@ -4,9 +4,9 @@ import { Dimensions} from 'react-native';
 import CustomHeader from '../components/CustomHeader';
 import {LaserTheme} from '../components/Custom_theme';
 import BluetoothManager from '../components/Ble_manager'
-import { Text, ThemeProvider, Header} from 'react-native-elements';
+import { Text, ThemeProvider, Header, Icon} from 'react-native-elements';
 import { Container, Content, Spinner, Body,Left, Right, NativeBaseProvider } from 'native-base';
-import Icon from 'react-native-vector-icons/Feather';
+// import Icon from 'react-native-vector-icons/Feather';
 import Title from '../components/Title'
 
 
@@ -122,6 +122,7 @@ componentWillUnmount() { // cancel all async tasks herere?
 logout = () => {this.props.navigation.navigate("Login")}
 
   render() {
+    console.log("HOMESCREEN")
     const {menuOptions} = this.state
     // const dimensions = Dimensions.get('window');
     //const imageHeight = Math.round(dimensions.width * 0.20);

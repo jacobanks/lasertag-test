@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {NativeModules,View,Dimensions, NativeEventEmitter} from 'react-native';
-import { ThemeProvider, Text, Button, ButtonGroup, Header} from 'react-native-elements';
+import { ThemeProvider, Text, Button, ButtonGroup, Header, Icon} from 'react-native-elements';
 import { LaserTheme } from '../components/Custom_theme';
 import CustomHeader from '../components/CustomHeader'
 import { Container, NativeBaseProvider } from 'native-base';
 import {Web_Urls} from '../constants/webUrls';
 import NumericInput from 'react-native-numeric-input'
 import BluetoothManager from '../components/Ble_manager'
-import Icon from 'react-native-vector-icons/Feather';
+// import Icon from 'react-native-vector-icons/Feather';
 import Title from '../components/Title'
 
 const dimensions = Dimensions.get('window');
@@ -227,6 +227,7 @@ export default class HostScreen extends Component {
   goBack = () => {this.props.navigation.goBack()}
 
   render() {
+    console.log("HOSTSCREEN")
     return (
       <NativeBaseProvider>
         <ThemeProvider {...this.props}  theme={LaserTheme}>

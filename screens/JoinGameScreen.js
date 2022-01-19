@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {View,NativeEventEmitter,NativeModules,Dimensions} from 'react-native';
-import { Text,Button, ThemeProvider, Input, Header} from 'react-native-elements';
+import { Text,Button, ThemeProvider, Input, Header, Icon} from 'react-native-elements';
 import { LaserTheme } from '../components/Custom_theme';
-import Icon from 'react-native-vector-icons/Feather';
+// import Icon from 'react-native-vector-icons/Feather';
 import CustomHeader from '../components/CustomHeader';
 import {Web_Urls} from '../constants/webUrls';
 import { Container, Content, Spinner, Body,Left, Right, NativeBaseProvider } from 'native-base';
@@ -269,6 +269,7 @@ export default class JoinGameScreen extends Component {
   }
 
   render() {
+    console.log("JOINGAMESCREEN")
     return(
       <NativeBaseProvider>
       <ThemeProvider {...this.props}  theme={LaserTheme}>

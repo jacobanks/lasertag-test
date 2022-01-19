@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, View, NativeEventEmitter, AppState, NativeModules, ActivityIndicator, FlatList, Dimensions, ViewBase, Alert } from 'react-native';
 import { LaserTheme } from '../components/Custom_theme';
 import CustomHeader from '../components/CustomHeader';
-import { ThemeProvider, Text, Button, Slider, ListItem, ButtonGroup, Card, Header } from 'react-native-elements';
+import { ThemeProvider, Text, Button, Slider, ListItem, ButtonGroup, Card, Header, Icon } from 'react-native-elements';
 import { Container, Spinner, NativeBaseProvider } from 'native-base';
 import { Web_Urls } from '../constants/webUrls';
 import Title from '../components/Title'
-import Icon from 'react-native-vector-icons/Feather';
+// import Icon from 'react-native-vector-icons/Feather';
 
 const dimensions = Dimensions.get('window');
 const Container_Width = Math.round(dimensions.width *1/3);
@@ -139,7 +139,20 @@ export default class GameLobbyScreen extends Component {
     }
   }
 
+  exitGame = () =>{
+    Alert.alert(
+      'Exit Game',
+      'Are you sure you want to exit this game?',
+      [
+        {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'Yes', onPress: () => this.props.navigation.navigate("Home")},
+      ],
+      {cancelable: true},
+    );
+  }
+
   render() {
+    console.log("LOADINGSCREEN")
     const styles = StyleSheet.create({
       titleText: {
         fontSize: 50,

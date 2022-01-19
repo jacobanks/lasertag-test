@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, NativeEventEmitter, AppState, NativeModules, ActivityIndicator, FlatList, Dimensions, ViewBase, Alert } from 'react-native';
-import { Text, ThemeProvider, ListItem, Header } from 'react-native-elements';
+import { Text, ThemeProvider, ListItem, Header, Icon } from 'react-native-elements';
 import { LaserTheme } from '../components/Custom_theme';
 import CustomHeader from '../components/CustomHeader';
 import { Web_Urls } from '../constants/webUrls';
 import { NativeBaseProvider } from 'native-base';
 import Title from '../components/Title';
-import Icon from 'react-native-vector-icons/Feather';
+// import Icon from 'react-native-vector-icons/Feather';
 
 const dimensions = Dimensions.get('window');
 const Container_Width = Math.round(dimensions.width * 1 / 4);
@@ -49,7 +49,7 @@ export default class GameLobbyScreen extends Component {
     const gameLength = 900; // Equal to 15 minutes
     num_teams = gameData.game.teams.length
     if(num_teams > 0){
-      this.state.teamList = teamList.teams
+      this.state.teamList = gameData.game.teams
     }
   
     scoreEvents = this.requestScoreboardData(game_id)
@@ -80,7 +80,7 @@ export default class GameLobbyScreen extends Component {
         const gameID = this.state.gameData.game.id;
         console.log("Game is over")
         //this.requestGameOver(gameID);
-         } else {
+      } else {
         this.setState({gameClock: curClock -1});
       }
     }, 1000);
@@ -262,7 +262,7 @@ export default class GameLobbyScreen extends Component {
       {cancelable: true},
     );
   }
-  
+
   render() {
     const gameTime = 900;
     const styles = StyleSheet.create({

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {StyleSheet,View, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import { Button, ThemeProvider, Input, Header } from 'react-native-elements';
+// import Icon from 'react-native-vector-icons/Feather';
+import { Button, ThemeProvider, Input, Header, Icon } from 'react-native-elements';
 import { LaserTheme } from '../components/Custom_theme';
 import { Container, Content, Spinner, Body,Left, Right, NativeBaseProvider } from 'native-base';
 import {Web_Urls} from '../constants/webUrls';
@@ -188,6 +188,7 @@ export default class LoginScreen extends Component {
     }
 
     render() {
+      console.log("LOGINSCREEN")
       return(
         <NativeBaseProvider>
         <ThemeProvider theme={LaserTheme}>
